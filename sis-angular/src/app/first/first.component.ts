@@ -11,14 +11,21 @@ import {AboutmeClass} from "./aboutme-class";
 export class FirstComponent implements OnInit {
   aboutme:AboutmeClass;
   dateNY:number = new Date(2019, 0, 1).getTime();
-  dateNow:number = Date.now();
-  dateResult:number = (this.dateNY-this.dateNow);
-  dateLast:Date = new Date(this.dateResult);
-  monthLast:number = this.dateLast.getMonth();
-  dayLast:number = this.dateLast.getDay();
-  hoursLast:number = this.dateLast.getHours();
-  minutesLast:number= this.dateLast.getMinutes();
-  secondsLast:number= this.dateLast.getSeconds();
+  dateNow:number;
+  dateResult:number;
+  dateLast:Date;
+  monthLast:number;
+  dayLast:number;
+  hoursLast:number;
+  minutesLast:number;
+  secondsLast:number;
+
+    dateresult (dateNY:number,dateNow:number ): Date {
+      this.dateNow = Date.now();
+      this.dateResult = (this.dateNY-this.dateNow);
+      this.dateLast = new Date(this.dateResult);
+      return this.dateLast
+    }
 
   private timerId: number;
 
@@ -27,11 +34,19 @@ export class FirstComponent implements OnInit {
       'Михаил Дергачев',
       new Date(1990, 3, 4),
       'город Краснояск',
-      'неоконченное высшее, СибГАУ, "Физика".')
+      'неоконченное высшее, СибГАУ, "Физика".');
+
+    this.dateLast = this.dateresult(this.dateNY,this.dateNow )
+    this.monthLast = this.dateLast.getMonth();
+    this.dayLast = this.dateLast.getDay();
+    this.hoursLast = this.dateLast.getHours();
+    this.minutesLast = this.dateLast.getMinutes();
+    this.secondsLast= this.dateLast.getSeconds();
+
   }
 
   ngOnInit() {
-    this.timerId = setInterval(() => this.dateResult--, 1000);
+   this.timerId = setInterval(this.dateresult(this.dateNY,this.dateNow), 1000);
 
 
   }
