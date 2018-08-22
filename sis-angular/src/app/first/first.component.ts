@@ -8,7 +8,7 @@ import {AboutmeClass} from "./aboutme-class";
   templateUrl: './first.component.html',
   styleUrls: ['./first.component.css']
 })
-export class FirstComponent implements OnInit {
+export class FirstComponent implements OnInit, OnDestroy {
   aboutme:AboutmeClass;
   dateNY:number = new Date(2019, 0, 1).getTime();
   dateNow:number;
@@ -20,11 +20,16 @@ export class FirstComponent implements OnInit {
   minutesLast:number;
   secondsLast:number;
 
-    dateresult (dateNY:number,dateNow:number ): Date {
+    dateUpdate (dateNY:number,dateNow:number ) {
       this.dateNow = Date.now();
       this.dateResult = (this.dateNY-this.dateNow);
       this.dateLast = new Date(this.dateResult);
-      return this.dateLast
+      this.monthLast = this.dateLast.getMonth();
+      this.dayLast = this.dateLast.getDay();
+      this.hoursLast = this.dateLast.getHours();
+      this.minutesLast = this.dateLast.getMinutes();
+      this.secondsLast= this.dateLast.getSeconds();
+
     }
 
   private timerId: number;
@@ -36,17 +41,13 @@ export class FirstComponent implements OnInit {
       'город Краснояск',
       'неоконченное высшее, СибГАУ, "Физика".');
 
-    this.dateLast = this.dateresult(this.dateNY,this.dateNow )
-    this.monthLast = this.dateLast.getMonth();
-    this.dayLast = this.dateLast.getDay();
-    this.hoursLast = this.dateLast.getHours();
-    this.minutesLast = this.dateLast.getMinutes();
-    this.secondsLast= this.dateLast.getSeconds();
+    this.dateUpdate(this.dateNY,this.dateNow )
+
 
   }
 
   ngOnInit() {
-   this.timerId = setInterval(this.dateresult(this.dateNY,this.dateNow), 1000);
+    this.timerId = setInterval(() => this.dateUpdate(this.dateNY,this.dateNow), 1000);
 
 
   }
