@@ -11,6 +11,8 @@ import {AboutmeClass} from "./aboutme-class";
 export class FirstComponent implements OnInit {
   aboutme: AboutmeClass;
 
+
+
   constructor() {
     this.aboutme = new AboutmeClass(
       'Михаил Дергачев',
