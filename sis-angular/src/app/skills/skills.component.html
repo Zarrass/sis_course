@@ -3,8 +3,8 @@
   <li *ngFor="let skill of skills">
     {{skill}}</li>
   <input #newSkill (keyup.enter)="addSkill(newSkill.value);
-         newSkill.value=' '">
-  <button (click)="addSkill(newSkill.value); newSkill.value=' '">Add</button>
+         newSkill.value=null">
+  <button (click)="addSkill(newSkill.value); newSkill.value=null">Add</button>
 </ol>
 <ol>
   <h2>А теперь об интересах и  увлечениях:</h2>
@@ -12,7 +12,7 @@
     {{interest}}
   </li>
   <input #newInterest (keyup.enter)="addInterest(newInterest.value);
-         newInterest.value=' '">
+         newInterest.value=null">
   <button (click)="addInterest(newInterest.value);
-         newInterest.value=' '">Add</button>
+         newInterest.value=null">Add</button>
 </ol>
